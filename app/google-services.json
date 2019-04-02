@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "63712498104",
+    "firebase_url": "https://radioetzion-186b2.firebaseio.com",
+    "project_id": "radioetzion-186b2",
+    "storage_bucket": "radioetzion-186b2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:63712498104:android:ed4a2199616cb670",
+        "android_client_info": {
+          "package_name": "com.project.radioetzion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "63712498104-lamojeh8ats15dp0ad17u44orunouj9t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.radioetzion",
+            "certificate_hash": "e13839aeb927e0337cab9fa68615a1e25c19217c"
+          }
+        },
+        {
+          "client_id": "63712498104-tqc4hbi5a2qo2u0kq0t22cd99s2oir60.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.radioetzion",
+            "certificate_hash": "09c2b9bfd61273b6ce78b9e887a8353c7536358e"
+          }
+        },
+        {
+          "client_id": "63712498104-v7kbe522fa113jp47ufeqo28foh16tfb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyJGuOr6VYYIs9ObmShaOOlWfBTtrE_iM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "63712498104-v7kbe522fa113jp47ufeqo28foh16tfb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

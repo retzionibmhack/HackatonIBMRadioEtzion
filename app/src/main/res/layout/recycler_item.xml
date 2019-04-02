@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="4dp"
+    android:layout_marginBottom="6dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="4dp">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="57dp"
+            android:id="@+id/imgStream"
+            android:padding="2dp"
+            android:src="@drawable/ic_slow_motion_video_black_24dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_centerInParent="true"
+            android:layout_toStartOf="@+id/txtCreate"
+            android:layout_toEndOf="@+id/imgStream"
+            android:maxLines="2"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
+            android:id="@+id/txtStreamName"
+            android:text="Hello word this is the song, bubu bu bu bubu"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="18/01/2019"
+            android:id="@+id/txtCreate"
+            android:textSize="12sp"
+            android:layout_alignParentEnd="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20:50:50"
+            android:id="@+id/txtDuretion"
+            android:textColor="#A50000"
+            android:textSize="10sp"
+            android:layout_marginTop="20sp"
+            android:layout_below="@+id/txtCreate"
+            android:layout_alignParentEnd="true"
+            />
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

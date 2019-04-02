@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="500dp"
+        android:layout_height="100dp"
+        android:src="@drawable/splash"
+        android:id="@+id/imgLogin"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtRUser"
+        android:hint="User Name"
+        android:textSize="20sp"
+        android:layout_below="@+id/imgLogin"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20sp"
+        android:layout_marginRight="20sp"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtREmail"
+        android:hint="Email address"
+        android:inputType="textEmailAddress"
+        android:textSize="20sp"
+        android:layout_below="@+id/txtRUser"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20sp"
+        android:layout_marginRight="20sp"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtRPass"
+        android:hint="Password"
+        android:textSize="20sp"
+        android:layout_below="@+id/txtREmail"
+        android:inputType="textPassword"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20sp"
+        android:layout_marginRight="20sp"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtPassAgain"
+        android:hint="Password again"
+        android:inputType="textPassword"
+        android:textSize="20sp"
+        android:layout_below="@+id/txtRPass"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20sp"
+        android:layout_marginRight="20sp"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnRRegister"
+        android:layout_below="@+id/txtPassAgain"
+        android:layout_margin="20dp"
+        android:text="Register"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnRRegister"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/registerPB"
+        android:visibility="invisible"/>
+
+</RelativeLayout>
