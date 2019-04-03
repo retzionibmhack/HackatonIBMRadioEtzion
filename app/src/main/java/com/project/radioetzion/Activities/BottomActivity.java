@@ -1,14 +1,20 @@
 package com.project.radioetzion.Activities;
 
+import android.app.MediaRouteButton;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.project.radioetzion.Fragments.HomeFragment;
+import com.project.radioetzion.MainActivity;
 import com.project.radioetzion.R;
 import com.project.radioetzion.Fragments.StreamFragment;
 import com.project.radioetzion.Fragments.WishFragment;
@@ -41,6 +47,7 @@ public class BottomActivity extends AppCompatActivity {
         }
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,5 +59,7 @@ public class BottomActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.framagment_container, new HomeFragment()).commit();
 
     }
+
+
 
 }
