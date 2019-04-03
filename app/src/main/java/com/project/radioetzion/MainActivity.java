@@ -21,7 +21,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 import com.project.radioetzion.Activities.RegisterActivity;
+import com.project.radioetzion.Model.JSONData;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -54,12 +56,14 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        FirebaseApp.initializeApp(this);
-        // Write a message to the database
-        database = FirebaseDatabase.getInstance();
-        myRef = FirebaseDatabase.getInstance().getReference("profile");
+//        FirebaseApp.initializeApp(this);
+//        // Write a message to the database
+//        database = FirebaseDatabase.getInstance();
+//        myRef = FirebaseDatabase.getInstance().getReference("profile");
+//
+//        myRef.setValue("Hello, Firebase2!");
 
-        myRef.setValue("Hello, Firebase!");
+
 
         RegisterActivity activity = new RegisterActivity();
         activity.masho("shimon ", new RegisterActivity.inter() {

@@ -15,8 +15,46 @@ import java.util.ArrayList;
 
 public class StreamAdapter extends RecyclerView.Adapter<StreamAdapter.StreamViewHolder> {
 
-    private ArrayList<JSONData> mStreamItem;
+    private ArrayList<JSONData> mData;
     private OnItemClickListener listener;
+
+
+    public StreamAdapter(ArrayList<JSONData> streamList, OnItemClickListener listener) {
+        mData = streamList;
+        this.listener = listener;
+    }
+
+
+    @NonNull
+    @Override
+    public StreamViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_item, viewGroup, false);
+        StreamViewHolder streamViewHolder = new StreamViewHolder(v);
+        return streamViewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull StreamViewHolder streamViewHolder, int i) {
+        JSONData currentItem = mData.get(i);
+        streamViewHolder.mImageView.setImageResource(R.drawable.musicicon);
+        streamViewHolder.mTextView1.setText(currentItem.getVodName());
+        streamViewHolder.mTextView2.setText(""+currentItem.getCreationDate());
+        streamViewHolder.mTextView3.setText(""+Double.toString(currentItem.getDuration()));
+
+        streamViewHolder.bind(mData.get(i), listener);
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return mData.size();
+    }
+
+
+    public interface OnItemClickListener {
+        void onItemClick(JSONData item);
+    }
+
 
     public static class StreamViewHolder extends RecyclerView.ViewHolder{
         public ImageView mImageView;
@@ -38,41 +76,6 @@ public class StreamAdapter extends RecyclerView.Adapter<StreamAdapter.StreamView
                 }
             });
         }
-    }
-    public StreamAdapter(ArrayList<JSONData> streamList, OnItemClickListener listener) {
-        mStreamItem = streamList;
-        this.listener = listener;
-    }
-
-
-    @NonNull
-    @Override
-    public StreamViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_item, viewGroup, false);
-        StreamViewHolder streamViewHolder = new StreamViewHolder(v);
-        return streamViewHolder;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull StreamViewHolder streamViewHolder, int i) {
-        JSONData currentItem = mStreamItem.get(i);
-        streamViewHolder.mImageView.setImageResource(R.drawable.musicicon);
-        streamViewHolder.mTextView1.setText(currentItem.getVodName());
-        streamViewHolder.mTextView2.setText(currentItem.getCreationDate());
-        streamViewHolder.mTextView3.setText(Integer.toString(currentItem.getDuration()));
-
-        streamViewHolder.bind(mStreamItem.get(i), listener);
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return mStreamItem.size();
-    }
-
-
-    public interface OnItemClickListener {
-        void onItemClick(JSONData item);
     }
 
 }

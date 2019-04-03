@@ -5,50 +5,49 @@ import com.google.gson.annotations.SerializedName;
 public class JSONData {
 
     @SerializedName("body")
-    private String streamName;
-    private String vodName;
-    private String streamId;
+    private double creationDate;
+    private double duration;
     private String filePath;
-    private String vodId;
+    private double fileSize;
+    private String streamId;
+    private String streamName;
     private String type;
-    private String creationDate;
-    private int duration;
-    private int fileSize;
+    private double vodId;
+    private String vodName;
 
     public String getStreamName() {
         return streamName;
     }
 
-    public JSONData(String streamName, String vodName, String streamId, String filePath, String vodId, String type, String creationDate, int duration, int fileSize) {
-        this.streamName = streamName;
-        this.vodName = vodName;
-        this.streamId = streamId;
-        this.filePath = filePath;
-        this.vodId = vodId;
-        this.type = type;
+    public JSONData() {
+    }
+
+    public JSONData(double creationDate, double duration, String filePath, double fileSize, String streamId, String streamName, String type, double vodId, String vodName) {
         this.creationDate = creationDate;
         this.duration = duration;
+        this.filePath = filePath;
         this.fileSize = fileSize;
-    }
-
-    public void setStreamName(String streamName) {
+        this.streamId = streamId;
         this.streamName = streamName;
-    }
-
-    public String getVodName() {
-        return vodName;
-    }
-
-    public void setVodName(String vodName) {
+        this.type = type;
+        this.vodId = vodId;
         this.vodName = vodName;
     }
 
-    public String getStreamId() {
-        return streamId;
+    public double getCreationDate() {
+        return creationDate;
     }
 
-    public void setStreamId(String streamId) {
-        this.streamId = streamId;
+    public void setCreationDate(double creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public double getDuration() {
+        return duration;
+    }
+
+    public void setDuration(double duration) {
+        this.duration = duration;
     }
 
     public String getFilePath() {
@@ -59,12 +58,24 @@ public class JSONData {
         this.filePath = filePath;
     }
 
-    public String getVodId() {
-        return vodId;
+    public double getFileSize() {
+        return fileSize;
     }
 
-    public void setVodId(String vodId) {
-        this.vodId = vodId;
+    public void setFileSize(double fileSize) {
+        this.fileSize = fileSize;
+    }
+
+    public String getStreamId() {
+        return streamId;
+    }
+
+    public void setStreamId(String streamId) {
+        this.streamId = streamId;
+    }
+
+    public void setStreamName(String streamName) {
+        this.streamName = streamName;
     }
 
     public String getType() {
@@ -75,27 +86,34 @@ public class JSONData {
         this.type = type;
     }
 
-    public String getCreationDate() {
-        return creationDate;
+    public double getVodId() {
+        return vodId;
     }
 
-    public void setCreationDate(String creationDate) {
-        this.creationDate = creationDate;
+    public void setVodId(double vodId) {
+        this.vodId = vodId;
     }
 
-    public int getDuration() {
-        return duration;
+    public String getVodName() {
+        return vodName;
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
+    public void setVodName(String vodName) {
+        this.vodName = vodName;
     }
 
-    public int getFileSize() {
-        return fileSize;
-    }
-
-    public void setFileSize(int fileSize) {
-        this.fileSize = fileSize;
+    @Override
+    public String toString() {
+        return "JSONData{" +
+                "creationDate=" + creationDate +
+                ", duration=" + duration +
+                ", filePath='" + filePath + '\'' +
+                ", fileSize=" + fileSize +
+                ", streamId='" + streamId + '\'' +
+                ", streamName='" + streamName + '\'' +
+                ", type='" + type + '\'' +
+                ", vodId=" + vodId +
+                ", vodName='" + vodName + '\'' +
+                '}';
     }
 }

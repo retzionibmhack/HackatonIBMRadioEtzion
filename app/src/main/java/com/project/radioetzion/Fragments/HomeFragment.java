@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +17,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.util.JsonMapper;
+import com.project.radioetzion.Adapters.ProfileAdapter;
+import com.project.radioetzion.Model.StreamItems;
 import com.project.radioetzion.Utils.JSONHandler;
 import com.project.radioetzion.Model.JSONData;
 
@@ -33,6 +45,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
+@SuppressWarnings("ALL")
 public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
     ArrayList<JSONData> streamItems = new ArrayList<>();
@@ -40,12 +53,64 @@ public class HomeFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Calendar calendar = Calendar.getInstance();
+    public DatabaseReference databaseReference;
+    private Object options;
+    ProfileAdapter adapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        mRecyclerView = view.findViewById(R.id.recyclerView);
+        mRecyclerView = view.findViewById(R.id.rvListData);
+
+
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("profile");
+
+
+
+        options = new FirebaseRecyclerOptions.Builder<JSONData>()
+                .setQuery(databaseReference, JSONData.class).build();
+
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                Log.d("StreamName", ""+dataSnapshot.getValue(JSONData.class).getStreamName());
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                Log.d("databaseError",  " "+databaseError.getMessage());
+//            }
+//        });
+//        Log.d("DataSnapshot", ""+((FirebaseRecyclerOptions) options).getSnapshots().size()+"  "+options.toString());
+
+
+        adapter = new ProfileAdapter(options){
+
+            @NonNull
+            @Override
+            public ProfileViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                View view = LayoutInflater.from(getContext()).inflate(R.layout.recycler_item, viewGroup, false);
+
+                return new ProfileViewHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull ProfileViewHolder holder, int position, @NonNull JSONData model) {
+                holder.txtStreamName.setText(model.getFilePath());
+            }
+        };
+
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(layoutManager);
+        adapter.startListening();
+        mRecyclerView.setAdapter(adapter);
+
+       /*
         setPointer();
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -75,10 +140,17 @@ public class HomeFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 //        mRecyclerView.setAdapter(mAdapter);
         Log.e(TAG, "setPointer: " + "hiwwww" );
-        return view;
+*/
+
+        //send JSONData to Firebase:
+
+
+
+     return view;
 
     }
 
+    /*
     private void setPointer() {
         Log.e(TAG, "setPointer: " + "hi" );
         Retrofit retrofit = new Retrofit.Builder()
@@ -131,4 +203,7 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+    */
+
 }
+
