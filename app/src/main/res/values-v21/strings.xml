@@ -14,4 +14,5 @@
     <string name="rewind"><![CDATA[<<]]></string>
     <string name="forward"><![CDATA[>>]]></string>
     <string name="pause">||</string>
+    <string name="wrongURI">קישור לא תקין!</string>
 </resources>
