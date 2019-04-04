@@ -1,6 +1,7 @@
 package com.project.radioetzion.Adapters;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,12 +63,14 @@ public class StreamAdapter extends RecyclerView.Adapter<StreamAdapter.StreamView
         public TextView mTextView2;
         public TextView mTextView3;
 
+
         public StreamViewHolder(View itemView){
             super(itemView);
             mImageView = itemView.findViewById(R.id.imgStream);
             mTextView1 = itemView.findViewById(R.id.txtStreamName);
             mTextView2 = itemView.findViewById(R.id.txtCreate);
             mTextView3 = itemView.findViewById(R.id.txtDuretion);
+
         }
         public void bind(final JSONData item, final OnItemClickListener listener) {
             itemView.setOnClickListener(new View.OnClickListener() {

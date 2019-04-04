@@ -72,22 +72,6 @@ public class HomeFragment extends Fragment {
         options = new FirebaseRecyclerOptions.Builder<JSONData>()
                 .setQuery(databaseReference, JSONData.class).build();
 
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                Log.d("StreamName", ""+dataSnapshot.getValue(JSONData.class).getStreamName());
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                Log.d("databaseError",  " "+databaseError.getMessage());
-//            }
-//        });
-//        Log.d("DataSnapshot", ""+((FirebaseRecyclerOptions) options).getSnapshots().size()+"  "+options.toString());
-
-
         adapter = new ProfileAdapter(options){
 
             @NonNull
@@ -99,23 +83,37 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull ProfileViewHolder holder, int position, @NonNull JSONData model) {
+            protected void onBindViewHolder(@NonNull final ProfileViewHolder holder, int position, @NonNull final JSONData model) {
                 holder.txtStreamName.setText(model.getFilePath());
+                final Bundle bundle = new Bundle();
+                holder.cvListItem.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ProgressDialog dialog = ProgressDialog.show(getContext(), "",
+                                "בטעינה אנא המתן...", true);
+
+                        StreamFragment streamFragment = new StreamFragment();
+                        bundle.putString("key", model.getFilePath());
+                        streamFragment.setArguments(bundle);
+                        Log.e(TAG, "onItemClick: " + "hi1" );
+                        getFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.framagment_container, streamFragment)
+                                .commit();
+                    }
+                });
             }
         };
 
 
+        setPointer();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
         adapter.startListening();
         mRecyclerView.setAdapter(adapter);
 
-       /*
-        setPointer();
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        final Bundle bundle = new Bundle();
 
+  /*
         // on item click listener pass the url of mp4 to streamFragment.
         mAdapter = new StreamAdapter(streamItems, new StreamAdapter.OnItemClickListener() {
             @Override
@@ -134,9 +132,9 @@ public class HomeFragment extends Fragment {
 
             }
         });
+*/
 
-
-
+   /*
         mRecyclerView.setLayoutManager(mLayoutManager);
 //        mRecyclerView.setAdapter(mAdapter);
         Log.e(TAG, "setPointer: " + "hiwwww" );
@@ -150,7 +148,7 @@ public class HomeFragment extends Fragment {
 
     }
 
-    /*
+
     private void setPointer() {
         Log.e(TAG, "setPointer: " + "hi" );
         Retrofit retrofit = new Retrofit.Builder()
@@ -170,40 +168,42 @@ public class HomeFragment extends Fragment {
 
         }
 
-
-
-        Call<List<JSONData>> call = jsonHandler.getJson();
-        call.enqueue(new Callback<List<JSONData>>() {
-            @Override
-            public void onResponse(Call<List<JSONData>> call, Response<List<JSONData>> response) {
-
-
-                for (int i = 0; i < response.body().size(); i++){
-                    calendar.setTimeInMillis(Long.parseLong(response.body().get(i).getCreationDate()));
-                    String currentDate = calendar.get(Calendar.DAY_OF_MONTH) + "/"+ calendar.get(Calendar.MONTH) +"/"+ calendar.get(Calendar.YEAR);
-
-                    streamItems.add(new JSONData(response.body().get(i).getStreamName(),
-                            response.body().get(i).getVodName().replace("_"," ").replace(".mp4", " "),
-                            response.body().get(i).getStreamId(),
-                            response.body().get(i).getFilePath(),
-                            response.body().get(i).getVodId(),
-                            response.body().get(i).getType(),
-                            currentDate,
-                            response.body().get(i).getDuration(),
-                            response.body().get(i).getFileSize()));
-                    Log.e(TAG, "response.body().get(i).getVodName(): " +  response.body().get(i).getVodName());
-
-                }
-                mRecyclerView.setAdapter(mAdapter);
-            }
-
-            @Override
-            public void onFailure(Call<List<JSONData>> call, Throwable t) {
-                Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
-            }
-        });
+//
+//
+//        Call<List<JSONData>> call = jsonHandler.getJson();
+//        call.enqueue(new Callback<List<JSONData>>() {
+//            @Override
+//            public void onResponse(Call<List<JSONData>> call, Response<List<JSONData>> response) {
+//
+//
+//                for (int i = 0; i < response.body().size(); i++){
+//                    calendar.setTimeInMillis((long) response.body().get(i).getCreationDate());
+//                    String currentDate = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH) + "/"+ calendar.get(Calendar.MONTH) +"/"+ calendar.get(Calendar.YEAR));
+//
+//
+//                    streamItems.add(new JSONData(
+//                            Double.parseDouble(response.body().get(i).getStreamName()),
+//                            Double.parseDouble(response.body().get(i).getVodName().replace("_"," ").replace(".mp4", " ")),
+//                            response.body().get(i).getStreamId(),
+//                            Double.parseDouble(response.body().get(i).getFilePath()),
+//                            String.valueOf(response.body().get(i).getVodId()),
+//                            response.body().get(i).getType(),
+//                            currentDate,
+//                            response.body().get(i).getDuration(),
+//                            String.valueOf(response.body().get(i).getFileSize())));
+//                    Log.e(TAG, "response.body().get(i).getVodName(): " +  response.body().get(i).getVodName());
+//
+//                }
+//                mRecyclerView.setAdapter(mAdapter);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<JSONData>> call, Throwable t) {
+//                Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
+//            }
+//        });
     }
-    */
+
 
 }
 

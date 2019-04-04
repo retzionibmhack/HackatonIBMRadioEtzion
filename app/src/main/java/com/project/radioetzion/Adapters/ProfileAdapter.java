@@ -1,6 +1,7 @@
 package com.project.radioetzion.Adapters;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,6 +31,7 @@ public abstract class ProfileAdapter extends FirebaseRecyclerAdapter<JSONData, P
         public TextView txtStreamName;
         public TextView mTextView2;
         public TextView mTextView3;
+        public CardView cvListItem;
 
         public ProfileViewHolder(View itemView){
             super(itemView);
@@ -37,6 +39,7 @@ public abstract class ProfileAdapter extends FirebaseRecyclerAdapter<JSONData, P
             txtStreamName = itemView.findViewById(R.id.txtStreamName);
             mTextView2 = itemView.findViewById(R.id.txtCreate);
             mTextView3 = itemView.findViewById(R.id.txtDuretion);
+            cvListItem = itemView.findViewById(R.id.cvListItem);
         }
 
 
