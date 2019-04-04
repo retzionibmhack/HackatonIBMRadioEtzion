@@ -91,7 +91,6 @@ public class HomeFragment extends Fragment {
                     holder.txtStreamName.setText(model.getFilePath());
                     final Bundle bundle = new Bundle();
 
-
                     holder.cvListItem.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -113,6 +112,7 @@ public class HomeFragment extends Fragment {
                         }
                     });
                 }else{
+                    mDialog.dismiss();
                     final AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
                     alert.setTitle("סיום").
                             setMessage("אין חיבור רשת, אנא וודא שהנך מחובר לרשת לאחר מכן לחץ על התחבר  מחדש")
