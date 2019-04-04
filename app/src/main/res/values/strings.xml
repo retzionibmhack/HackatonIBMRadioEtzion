@@ -8,4 +8,8 @@
     <string name="action_settings">Settings</string>
     <string name="loadingPleaseWait">אנא המתן, טוען נתונים...</string>
     <string name="wrongURI">קישור לא תקין!</string>
+    <string name="comments_tab_string">תגובות</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

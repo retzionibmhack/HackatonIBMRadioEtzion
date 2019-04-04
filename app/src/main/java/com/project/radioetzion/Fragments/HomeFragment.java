@@ -1,7 +1,11 @@
 package com.project.radioetzion.Fragments;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -19,6 +23,7 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.project.radioetzion.Activities.SplashActivity;
 import com.project.radioetzion.Adapters.ProfileAdapter;
 import com.project.radioetzion.Utils.JSONHandler;
 import com.project.radioetzion.Model.JSONData;
@@ -27,6 +32,7 @@ import com.project.radioetzion.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -44,16 +50,25 @@ public class HomeFragment extends Fragment {
     private Object options;
     ProfileAdapter adapter;
 
+
+
+    private FirebaseDatabase database;
+    public ProgressDialog mDialog;
+    public static ProgressDialog mNowPlayingDialog;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         mRecyclerView = view.findViewById(R.id.rvListData);
 
+        mDialog = ProgressDialog.show(getContext(), "",
+                "בטעינה אנא המתן...", true);
 
+//        databaseReference = FirebaseDatabase.getInstance().getReference("dataSource");
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("profile");
-
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("dataSource");
 
 
         options = new FirebaseRecyclerOptions.Builder<JSONData>()
@@ -71,23 +86,48 @@ public class HomeFragment extends Fragment {
 
             @Override
             protected void onBindViewHolder(@NonNull final ProfileViewHolder holder, int position, @NonNull final JSONData model) {
-                holder.txtStreamName.setText(model.getFilePath());
-                final Bundle bundle = new Bundle();
-                holder.cvListItem.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                if (model.getFilePath() != null){
+                    mDialog.dismiss();
+                    holder.txtStreamName.setText(model.getFilePath());
+                    final Bundle bundle = new Bundle();
 
 
-                        NowPlaying nowPlaying = new NowPlaying();
-                        bundle.putString("key", model.getFilePath());
-                        nowPlaying.setArguments(bundle);
-                        Log.e(TAG, "onItemClick: " + "hi1" );
-                        getFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.framagment_container, nowPlaying)
-                                .commit();
-                    }
-                });
+                    holder.cvListItem.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            NowPlayingFragment nowPlayingFragment = new NowPlayingFragment();
+                            bundle.putString("key", model.getFilePath());
+                            nowPlayingFragment.setArguments(bundle);
+                            Log.e(TAG, "onItemClick: " + "hi1" );
+
+                            mNowPlayingDialog = ProgressDialog.show(getContext(), "",
+                                    "מתחבר לשרת המדיה...", true);
+
+                            getFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.framagment_container, nowPlayingFragment)
+                                    .commit();
+
+
+                        }
+                    });
+                }else{
+                    final AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                    alert.setTitle("סיום").
+                            setMessage("אין חיבור רשת, אנא וודא שהנך מחובר לרשת לאחר מכן לחץ על התחבר  מחדש")
+                            .setCancelable(true)
+                            .setPositiveButton("התחבר מחדש", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                        Intent i = new Intent(getContext(), SplashActivity.class);
+                                        startActivity(i);
+
+                                }
+                            })
+                            .show();
+                }
+
             }
         };
 

@@ -22,8 +22,10 @@ import com.project.radioetzion.R;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import static com.project.radioetzion.Fragments.HomeFragment.mNowPlayingDialog;
 
-public class NowPlaying extends Fragment {
+
+public class NowPlayingFragment extends Fragment {
     private static final String TAG = "StreamFragment";
     private Button btnStart, btnForward, btnBack;
     private MediaPlayer mPlayer;
@@ -39,7 +41,7 @@ public class NowPlaying extends Fragment {
 
     public static int oneTimeOnly = 0;
     private String filePath;
-    private ProgressDialog mDialog;
+
 
     @Nullable
     @Override
@@ -52,8 +54,7 @@ public class NowPlaying extends Fragment {
         txtCurrentTime = view.findViewById(R.id.txtCurrentTime);
         txtTime = view.findViewById(R.id.txtTime);
 
-        mDialog = ProgressDialog.show(getContext(), "",
-                "בטעינה אנא המתן...", true);
+        mNowPlayingDialog.dismiss();
 
         seekbar = view.findViewById(R.id.seekBar);
         Bundle bundle =  this.getArguments();
@@ -83,7 +84,7 @@ public class NowPlaying extends Fragment {
 
         try {
             mPlayer.setDataSource(url);
-            mDialog.dismiss();
+
         } catch (IllegalArgumentException e) {
             Toast.makeText(getContext(), getString(R.string.wrongURI), Toast.LENGTH_LONG).show();
         } catch (SecurityException e) {
@@ -107,6 +108,7 @@ public class NowPlaying extends Fragment {
         }
         finalTime = mPlayer.getDuration();
         startTime = mPlayer.getCurrentPosition();
+
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

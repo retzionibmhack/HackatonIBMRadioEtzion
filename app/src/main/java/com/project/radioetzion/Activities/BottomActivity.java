@@ -8,10 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.project.radioetzion.Fragments.CommentsFragment;
 import com.project.radioetzion.Fragments.HomeFragment;
 import com.project.radioetzion.R;
-import com.project.radioetzion.Fragments.NowPlaying;
-import com.project.radioetzion.Fragments.WishFragment;
+import com.project.radioetzion.Fragments.NowPlayingFragment;
+import com.project.radioetzion.Fragments.PlaylistFragment;
 
 public class BottomActivity extends AppCompatActivity {
 
@@ -29,22 +32,29 @@ public class BottomActivity extends AppCompatActivity {
                     selectedFragment = new HomeFragment();
                     break;
                 case R.id.navigation_dashboard:
-                    selectedFragment = new NowPlaying();
+                    selectedFragment = new NowPlayingFragment();
                     break;
-                case R.id.navigation_notifications:
-                    selectedFragment = new WishFragment();
+                case R.id.navigation_playlist:
+                    selectedFragment = new PlaylistFragment();
                         break;
+                case R.id.navigation_comments:
+                    selectedFragment = new CommentsFragment();
+                    break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.framagment_container, selectedFragment).commit();
 
             return true;
         }
     };
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bottom);
+
+
 
 
 

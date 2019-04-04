@@ -28,8 +28,7 @@ import java.text.BreakIterator;
 public class SplashActivity extends AppCompatActivity {
 
     private String jsonString;
-    private FirebaseDatabase database;
-    public DatabaseReference databaseReference;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +36,17 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         FirebaseApp.initializeApp(this);
 
+//        // Write a message to the database
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference("dataSource");
+//
+//        myRef.setValue("Hello, World!");
+
         Thread myThread = new Thread(){
             @Override
             public void run() {
                 try {
-                    sleep(500);
+                    sleep(2000);
                     Intent intent = new Intent(getApplicationContext(), BottomActivity.class);
                     startActivity(intent);
                     finish();

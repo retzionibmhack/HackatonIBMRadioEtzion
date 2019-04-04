@@ -12,8 +12,12 @@
         android:title="@string/title_dashboard" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_playlist"
         android:icon="@drawable/ic_playlist_play"
         android:title="@string/title_notifications" />
+    <item
+        android:id="@+id/navigation_comments"
+        android:icon="@drawable/ic_comment"
+        android:title="@string/comments_tab_string" />
 
 </menu>

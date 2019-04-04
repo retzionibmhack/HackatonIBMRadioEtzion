@@ -29,10 +29,6 @@
             "package_name": "com.project.radioetzion",
             "certificate_hash": "09c2b9bfd61273b6ce78b9e887a8353c7536358e"
           }
-        },
-        {
-          "client_id": "63712498104-v7kbe522fa113jp47ufeqo28foh16tfb.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
@@ -41,20 +37,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "63712498104-v7kbe522fa113jp47ufeqo28foh16tfb.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
