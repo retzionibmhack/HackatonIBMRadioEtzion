@@ -88,6 +88,7 @@ public class HomeFragment extends Fragment {
             protected void onBindViewHolder(@NonNull final ProfileViewHolder holder, int position, @NonNull final JSONData model) {
                 if (model.getFilePath() != null){
                     mDialog.dismiss();
+                    //test
                     holder.txtStreamName.setText(model.getFilePath());
                     final Bundle bundle = new Bundle();
 
