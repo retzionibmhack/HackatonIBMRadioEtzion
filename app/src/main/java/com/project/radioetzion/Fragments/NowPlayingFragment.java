@@ -2,6 +2,7 @@ package com.project.radioetzion.Fragments;
 
 import android.app.ProgressDialog;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,9 +23,6 @@ import com.project.radioetzion.R;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import static com.project.radioetzion.Fragments.HomeFragment.mNowPlayingDialog;
-
-
 public class NowPlayingFragment extends Fragment {
     private static final String TAG = "StreamFragment";
     private Button btnStart, btnForward, btnBack;
@@ -41,12 +39,20 @@ public class NowPlayingFragment extends Fragment {
 
     public static int oneTimeOnly = 0;
     private String filePath;
+    public ProgressDialog mNowPlayingDialog;
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("shimi", "NPF onResume: " );
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_player, container, false);
+        Log.e("shimi", "NPF onCreateView: " );
         btnStart = view.findViewById(R.id.btnStart);
         btnForward = view.findViewById(R.id.btnForward);
         btnBack = view.findViewById(R.id.btnBack);
@@ -54,18 +60,34 @@ public class NowPlayingFragment extends Fragment {
         txtCurrentTime = view.findViewById(R.id.txtCurrentTime);
         txtTime = view.findViewById(R.id.txtTime);
 
-        mNowPlayingDialog.dismiss();
+
 
         seekbar = view.findViewById(R.id.seekBar);
         Bundle bundle =  this.getArguments();
 
         streamURL = (String) bundle.get("key");
-        setPointer();
+        Log.e("shimi", "NPF onCreateView:2 " );
+
         return view;
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.e("shimi", "NPF onStart: " );
+        mNowPlayingDialog = ProgressDialog.show(getContext(), "",
+                "מתחבר לשרת המדיה...", true);
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                setPointer();
+            }
+        });
 
+        Log.e("shimi", "NPF onStart:2 " );
+
+    }
 
     private void setPointer() {
 //        mediaPlayer();
@@ -74,6 +96,12 @@ public class NowPlayingFragment extends Fragment {
 
     private void mediaPlayer2() {
         mPlayer = new MediaPlayer();
+        mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mNowPlayingDialog.dismiss();
+            }
+        });
 //        Bundle bundle = this.getArguments();
 //        String url = null;
 //        if (bundle != null) {
@@ -86,11 +114,11 @@ public class NowPlayingFragment extends Fragment {
             mPlayer.setDataSource(url);
 
         } catch (IllegalArgumentException e) {
-            Toast.makeText(getContext(), getString(R.string.wrongURI), Toast.LENGTH_LONG).show();
+            toastOnUi(R.string.wrongURI);
         } catch (SecurityException e) {
-            Toast.makeText(getContext(),  getString(R.string.wrongURI), Toast.LENGTH_LONG).show();
+            toastOnUi(R.string.wrongURI);
         } catch (IllegalStateException e) {
-            Toast.makeText(getContext(),  getString(R.string.wrongURI), Toast.LENGTH_LONG).show();
+            toastOnUi(R.string.wrongURI);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -102,9 +130,10 @@ public class NowPlayingFragment extends Fragment {
         try {
             mPlayer.prepare();
         } catch (IllegalStateException e) {
-            Toast.makeText(getContext(),  getString(R.string.wrongURI), Toast.LENGTH_LONG).show();
+            toastOnUi(R.string.wrongURI);
+
         } catch (IOException e) {
-            Toast.makeText(getContext(),  getString(R.string.wrongURI), Toast.LENGTH_LONG).show();
+            toastOnUi(R.string.wrongURI);
         }
         finalTime = mPlayer.getDuration();
         startTime = mPlayer.getCurrentPosition();
@@ -204,6 +233,16 @@ public class NowPlayingFragment extends Fragment {
 
 
     }
+
+    private void toastOnUi(final int message) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getContext(),  getString(message), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     private Runnable UpdateSongTime = new Runnable() {
         public void run() {
             startTime = mPlayer.getCurrentPosition();

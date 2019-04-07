@@ -54,7 +54,6 @@ public class HomeFragment extends Fragment {
 
     private FirebaseDatabase database;
     public ProgressDialog mDialog;
-    public static ProgressDialog mNowPlayingDialog;
 
     @Nullable
     @Override
@@ -90,19 +89,18 @@ public class HomeFragment extends Fragment {
                     mDialog.dismiss();
                     //test
                     holder.txtStreamName.setText(model.getFilePath());
-                    final Bundle bundle = new Bundle();
+
 
                     holder.cvListItem.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
 
+
                             NowPlayingFragment nowPlayingFragment = new NowPlayingFragment();
+                            Bundle bundle = new Bundle();
                             bundle.putString("key", model.getFilePath());
                             nowPlayingFragment.setArguments(bundle);
-                            Log.e(TAG, "onItemClick: " + "hi1" );
-
-                            mNowPlayingDialog = ProgressDialog.show(getContext(), "",
-                                    "מתחבר לשרת המדיה...", true);
+                            Log.e("shimi", "onItemClick: " + "hi1" );
 
                             getFragmentManager()
                                     .beginTransaction()
