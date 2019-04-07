@@ -22,7 +22,7 @@
             android:src="@drawable/ic_slow_motion_video_black_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txtCreate" />
+            app:layout_constraintTop_toTopOf="@+id/txtCreateDate" />
 
         <TextView
             android:id="@+id/txtStreamName"
@@ -30,7 +30,7 @@
             android:layout_height="19dp"
             android:layout_centerInParent="true"
             android:layout_marginStart="16dp"
-            android:layout_toStartOf="@+id/txtCreate"
+            android:layout_toStartOf="@+id/txtCreateDate"
             android:layout_toEndOf="@+id/imgStream"
             android:maxLines="2"
             android:text="Hello word this is the song, bubu bu bu bubu"
@@ -40,7 +40,7 @@
             app:layout_constraintTop_toTopOf="@+id/imgStream" />
 
         <TextView
-            android:id="@+id/txtCreate"
+            android:id="@+id/txtCreateDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -54,7 +54,7 @@
             android:id="@+id/txtDuretion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtCreate"
+            android:layout_below="@+id/txtCreateDate"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="8dp"
             android:text="20:50:50"
@@ -71,7 +71,7 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/txtDuretion"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txtCreate"
+            app:layout_constraintTop_toTopOf="@+id/txtCreateDate"
             app:srcCompat="@drawable/ic_non_filled_like" />
     </android.support.constraint.ConstraintLayout>
 

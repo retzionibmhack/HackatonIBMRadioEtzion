@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user){
 
         if(user != null){
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), BottomActivity.class);
             startActivity(intent);
             progressBar.setVisibility(View.INVISIBLE);
         }

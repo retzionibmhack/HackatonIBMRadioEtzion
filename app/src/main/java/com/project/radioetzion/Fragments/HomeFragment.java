@@ -6,8 +6,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.MediaMetadataRetriever;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -30,9 +33,12 @@ import com.project.radioetzion.Model.JSONData;
 
 import com.project.radioetzion.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -88,8 +94,29 @@ public class HomeFragment extends Fragment {
                 if (model.getFilePath() != null){
                     mDialog.dismiss();
                     //test
-                    holder.txtStreamName.setText(model.getFilePath());
+                    holder.txtStreamName.setText(model.getVodName().replace("_"," ").replace(".mp4", " "));
 
+
+                    Date date = new java.util.Date((long) (model.getCreationDate()));
+                    SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy");
+                // give a timezone reference for formatting (see comment at the bottom)
+                    sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT+2"));
+                    String formattedDate = sdf.format(date);
+
+                    holder.txtCreateDate.setText(String.valueOf(formattedDate));
+
+//                    try {
+//                        String mediaPath = String.valueOf(Uri.parse("http://be.repoai.com:5080/WebRTCAppEE/rest/"+model.getFilePath()));
+//                        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+//                        mmr.setDataSource(mediaPath);
+//                        String duration = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+//                        mmr.release();
+//                        holder.txtDuretion.setText(String.valueOf(duration));
+//                    } catch (IllegalArgumentException e) {
+//                        e.printStackTrace();
+//                    }
+
+                    holder.txtDuretion.setText(String.valueOf((int) model.getDuration()));
 
                     holder.cvListItem.setOnClickListener(new View.OnClickListener() {
                         @Override

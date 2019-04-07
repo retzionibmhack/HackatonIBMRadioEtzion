@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.project.radioetzion.Model.JSONData;
-import com.project.radioetzion.Model.StreamItems;
 import com.project.radioetzion.R;
 
 public abstract class ProfileAdapter extends FirebaseRecyclerAdapter<JSONData, ProfileAdapter.ProfileViewHolder> {
@@ -29,16 +28,16 @@ public abstract class ProfileAdapter extends FirebaseRecyclerAdapter<JSONData, P
     public static class ProfileViewHolder extends RecyclerView.ViewHolder{
         public ImageView mImageView;
         public TextView txtStreamName;
-        public TextView mTextView2;
-        public TextView mTextView3;
+        public TextView txtCreateDate;
+        public TextView txtDuretion;
         public CardView cvListItem;
 
         public ProfileViewHolder(View itemView){
             super(itemView);
             mImageView = itemView.findViewById(R.id.imgStream);
             txtStreamName = itemView.findViewById(R.id.txtStreamName);
-            mTextView2 = itemView.findViewById(R.id.txtCreate);
-            mTextView3 = itemView.findViewById(R.id.txtDuretion);
+            txtCreateDate = itemView.findViewById(R.id.txtCreateDate);
+            txtDuretion = itemView.findViewById(R.id.txtDuretion);
             cvListItem = itemView.findViewById(R.id.cvListItem);
         }
 

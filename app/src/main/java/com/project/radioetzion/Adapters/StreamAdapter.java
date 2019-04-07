@@ -68,7 +68,7 @@ public class StreamAdapter extends RecyclerView.Adapter<StreamAdapter.StreamView
             super(itemView);
             mImageView = itemView.findViewById(R.id.imgStream);
             mTextView1 = itemView.findViewById(R.id.txtStreamName);
-            mTextView2 = itemView.findViewById(R.id.txtCreate);
+            mTextView2 = itemView.findViewById(R.id.txtCreateDate);
             mTextView3 = itemView.findViewById(R.id.txtDuretion);
 
         }
