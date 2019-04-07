@@ -63,6 +63,7 @@ public class HomeFragment extends Fragment {
     private FirebaseDatabase database;
     public ProgressDialog mDialog;
     private DatabaseReference likeRef;
+    private String formattedDate2;
 
     @Nullable
     @Override
@@ -111,7 +112,7 @@ public class HomeFragment extends Fragment {
                     final String formattedDate = sdf.format(date);
 
                     sdg.setTimeZone(java.util.TimeZone.getTimeZone("GMT+2"));
-                    final String formattedDate2 = sdg.format(date);
+                    formattedDate2 = sdg.format(date);
 
                     holder.txtCreateDate.setText(formattedDate);
 
