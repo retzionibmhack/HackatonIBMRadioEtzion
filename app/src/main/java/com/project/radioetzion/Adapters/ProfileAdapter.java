@@ -31,6 +31,9 @@ public abstract class ProfileAdapter extends FirebaseRecyclerAdapter<JSONData, P
         public TextView txtCreateDate;
         public TextView txtDuretion;
         public CardView cvListItem;
+        public ImageView ivLikeUnfilled;
+        public ImageView ivLikeFilled;
+        public TextView tvLikeCounter;
 
         public ProfileViewHolder(View itemView){
             super(itemView);
@@ -39,6 +42,10 @@ public abstract class ProfileAdapter extends FirebaseRecyclerAdapter<JSONData, P
             txtCreateDate = itemView.findViewById(R.id.txtCreateDate);
             txtDuretion = itemView.findViewById(R.id.txtDuretion);
             cvListItem = itemView.findViewById(R.id.cvListItem);
+            ivLikeUnfilled = itemView.findViewById(R.id.ivLikeUnfilled);
+            ivLikeFilled = itemView.findViewById(R.id.ivLikeFilled);
+            tvLikeCounter = itemView.findViewById(R.id.tvLikeCounter);
+
         }
 
 

@@ -17,38 +17,40 @@
             android:layout_width="50dp"
             android:layout_height="57dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:padding="2dp"
             android:src="@drawable/ic_slow_motion_video_black_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txtCreateDate" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtStreamName"
             android:layout_width="249dp"
             android:layout_height="19dp"
             android:layout_centerInParent="true"
-            android:layout_marginStart="16dp"
             android:layout_toStartOf="@+id/txtCreateDate"
             android:layout_toEndOf="@+id/imgStream"
             android:maxLines="2"
             android:text="Hello word this is the song, bubu bu bu bubu"
             android:textColor="#000000"
-            app:layout_constraintBottom_toBottomOf="@+id/imgStream"
-            app:layout_constraintStart_toEndOf="@+id/imgStream"
-            app:layout_constraintTop_toTopOf="@+id/imgStream" />
+            app:layout_constraintBottom_toTopOf="@+id/txtDuretion"
+            app:layout_constraintStart_toStartOf="@+id/txtCreateDate"
+            app:layout_constraintTop_toBottomOf="@+id/txtCreateDate" />
 
         <TextView
             android:id="@+id/txtCreateDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
             android:text="18/01/2019"
             android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/txtStreamName"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/txtStreamName"
+            app:layout_constraintStart_toEndOf="@+id/imgStream"
+            app:layout_constraintTop_toTopOf="@+id/imgStream"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/txtDuretion"
@@ -56,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtCreateDate"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="20:50:50"
             android:textColor="#A50000"
             android:textSize="10sp"
@@ -65,14 +67,35 @@
             app:layout_constraintTop_toBottomOf="@+id/txtStreamName" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/ivLikeUnfilled"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/txtDuretion"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/txtCreateDate"
             app:srcCompat="@drawable/ic_non_filled_like" />
+
+        <ImageView
+            android:id="@+id/ivLikeFilled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txtCreateDate"
+            app:srcCompat="@drawable/ic_filled_like" />
+
+        <TextView
+            android:id="@+id/tvLikeCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="@color/design_default_color_primary"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imgStream"
+            app:layout_constraintEnd_toEndOf="@+id/ivLikeUnfilled"
+            app:layout_constraintStart_toStartOf="@+id/ivLikeUnfilled"
+            app:layout_constraintTop_toBottomOf="@+id/ivLikeUnfilled" />
     </android.support.constraint.ConstraintLayout>
 
 

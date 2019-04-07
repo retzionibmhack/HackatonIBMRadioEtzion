@@ -1,22 +1,23 @@
 package com.project.radioetzion.Model;
 
 public class Likes {
-    String name;
-    Boolean isLike;
+    String isLike;
+
 
     public Likes() {
     }
 
-    public Likes(String name, Boolean isLike) {
-        this.name = name;
+    public Likes(String isLike) {
         this.isLike = isLike;
+
     }
 
-    @Override
-    public String toString() {
-        return "Likes{" +
-                "name='" + name + '\'' +
-                ", isLike=" + isLike +
-                '}';
+    public String isLike() {
+        return isLike;
     }
+
+    public void setLike(String like) {
+        isLike = like;
+    }
+
 }

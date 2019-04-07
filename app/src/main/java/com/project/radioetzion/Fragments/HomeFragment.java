@@ -1,16 +1,12 @@
 package com.project.radioetzion.Fragments;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.media.MediaMetadataRetriever;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,21 +20,25 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.project.radioetzion.Activities.SplashActivity;
 import com.project.radioetzion.Adapters.ProfileAdapter;
+import com.project.radioetzion.Model.Likes;
 import com.project.radioetzion.Utils.JSONHandler;
 import com.project.radioetzion.Model.JSONData;
 
 import com.project.radioetzion.R;
 
-import java.text.DateFormat;
+import java.nio.IntBuffer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -53,6 +53,8 @@ public class HomeFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private Calendar calendar = Calendar.getInstance();
     public DatabaseReference databaseReference;
+    private FirebaseAuth mAuth;
+
     private Object options;
     ProfileAdapter adapter;
 
@@ -60,6 +62,7 @@ public class HomeFragment extends Fragment {
 
     private FirebaseDatabase database;
     public ProgressDialog mDialog;
+    private DatabaseReference likeRef;
 
     @Nullable
     @Override
@@ -74,6 +77,8 @@ public class HomeFragment extends Fragment {
 
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("dataSource");
+        mAuth = FirebaseAuth.getInstance();
+        likeRef = database.getReference("likes").child(mAuth.getUid());
 
 
         options = new FirebaseRecyclerOptions.Builder<JSONData>()
@@ -96,25 +101,19 @@ public class HomeFragment extends Fragment {
                     //test
                     holder.txtStreamName.setText(model.getVodName().replace("_"," ").replace(".mp4", " "));
 
-
+                    final double profileCreationDate = model.getCreationDate();
                     Date date = new java.util.Date((long) (model.getCreationDate()));
+                    SimpleDateFormat sdg = new java.text.SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
                     SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy");
-                // give a timezone reference for formatting (see comment at the bottom)
+
+                    // give a timezone reference for formatting (see comment at the bottom)
                     sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT+2"));
-                    String formattedDate = sdf.format(date);
+                    final String formattedDate = sdf.format(date);
+
+                    sdg.setTimeZone(java.util.TimeZone.getTimeZone("GMT+2"));
+                    final String formattedDate2 = sdg.format(date);
 
                     holder.txtCreateDate.setText(formattedDate);
-
-//                    try {
-//                        String mediaPath = String.valueOf(Uri.parse("http://be.repoai.com:5080/WebRTCAppEE/rest/"+model.getFilePath()));
-//                        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-//                        mmr.setDataSource(mediaPath);
-//                        String duration = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
-//                        mmr.release();
-//                        holder.txtDuretion.setText(String.valueOf(duration));
-//                    } catch (IllegalArgumentException e) {
-//                        e.printStackTrace();
-//                    }
 
                     holder.txtDuretion.setText(model.getDuration());
 
@@ -136,6 +135,45 @@ public class HomeFragment extends Fragment {
 
                         }
                     });
+//
+//                    likeRef.child(formattedDate2).addListenerForSingleValueEvent(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                            dataSnapshot.getValue()
+//                            Likes post = dataSnapshot.getValue(Likes.class);
+//                            String likes = post.g;
+//                            Log.d("likes", likes);
+//
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                        }
+//                    });
+
+                    holder.ivLikeUnfilled.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Likes l = new Likes("true");
+                            holder.ivLikeUnfilled.setVisibility(View.INVISIBLE);
+                            holder.ivLikeFilled.setVisibility(View.VISIBLE);
+                            likeRef.push().child(formattedDate2).setValue(l);
+
+                        }
+                    });
+                    holder.ivLikeFilled.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Likes l = new Likes("false");
+                            holder.ivLikeFilled.setVisibility(View.INVISIBLE);
+                            holder.ivLikeUnfilled.setVisibility(View.VISIBLE);
+                            likeRef.push().child(formattedDate2).setValue(l);
+
+                        }
+                    });
+
+
                 }else{
                     mDialog.dismiss();
                     final AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
