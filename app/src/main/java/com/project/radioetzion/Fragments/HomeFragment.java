@@ -103,7 +103,7 @@ public class HomeFragment extends Fragment {
                     sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT+2"));
                     String formattedDate = sdf.format(date);
 
-                    holder.txtCreateDate.setText(String.valueOf(formattedDate));
+                    holder.txtCreateDate.setText(formattedDate);
 
 //                    try {
 //                        String mediaPath = String.valueOf(Uri.parse("http://be.repoai.com:5080/WebRTCAppEE/rest/"+model.getFilePath()));
@@ -116,12 +116,11 @@ public class HomeFragment extends Fragment {
 //                        e.printStackTrace();
 //                    }
 
-                    holder.txtDuretion.setText(String.valueOf((int) model.getDuration()));
+                    holder.txtDuretion.setText(model.getDuration());
 
                     holder.cvListItem.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
 
                             NowPlayingFragment nowPlayingFragment = new NowPlayingFragment();
                             Bundle bundle = new Bundle();

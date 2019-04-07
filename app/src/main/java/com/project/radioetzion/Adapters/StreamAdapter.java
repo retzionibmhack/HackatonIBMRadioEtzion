@@ -40,7 +40,7 @@ public class StreamAdapter extends RecyclerView.Adapter<StreamAdapter.StreamView
         streamViewHolder.mImageView.setImageResource(R.drawable.musicicon);
         streamViewHolder.mTextView1.setText(currentItem.getVodName());
         streamViewHolder.mTextView2.setText(""+currentItem.getCreationDate());
-        streamViewHolder.mTextView3.setText(""+Double.toString(currentItem.getDuration()));
+//        streamViewHolder.mTextView3.setText(""+Double.toString(currentItem.getDuration()));
 
         streamViewHolder.bind(mData.get(i), listener);
 

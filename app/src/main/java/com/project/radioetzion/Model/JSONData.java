@@ -6,7 +6,7 @@ public class JSONData {
 
     @SerializedName("body")
     private double creationDate;
-    private double duration;
+    private String duration;
     private String filePath;
     private double fileSize;
     private String streamId;
@@ -22,7 +22,7 @@ public class JSONData {
     public JSONData() {
     }
 
-    public JSONData(double creationDate, double duration, String filePath, double fileSize, String streamId, String streamName, String type, double vodId, String vodName) {
+    public JSONData(double creationDate, String duration, String filePath, double fileSize, String streamId, String streamName, String type, double vodId, String vodName) {
         this.creationDate = creationDate;
         this.duration = duration;
         this.filePath = filePath;
@@ -42,11 +42,11 @@ public class JSONData {
         this.creationDate = creationDate;
     }
 
-    public double getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public void setDuration(double duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
@@ -106,7 +106,7 @@ public class JSONData {
     public String toString() {
         return "JSONData{" +
                 "creationDate=" + creationDate +
-                ", duration=" + duration +
+                ", duration='" + duration + '\'' +
                 ", filePath='" + filePath + '\'' +
                 ", fileSize=" + fileSize +
                 ", streamId='" + streamId + '\'' +
